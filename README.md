@@ -1,5 +1,7 @@
 # 🔐 Cipher Breaker
 
+[![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-Vercel-black?style=for-the-badge&logo=vercel)](https://cipher-cracker-teal.vercel.app/)
+
 ![License](https://img.shields.io/badge/License-MIT-blue.svg)
 ![Next.js](https://img.shields.io/badge/Next.js-15-black?logo=next.js)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?logo=typescript)
@@ -90,6 +92,7 @@ Scroll down to the **Decryption Tool**.
 ## 🛠️ Tech Stack
 
 * **Framework:** [Next.js 15](https://nextjs.org/) (App Router)
+* **Hosting:** [Vercel](https://vercel.com/)
 * **Styling:** [Tailwind CSS v4](https://tailwindcss.com/)
 * **Language:** [TypeScript](https://www.typescriptlang.org/)
 * **Graphics:** HTML5 Canvas (for Matrix Rain)
