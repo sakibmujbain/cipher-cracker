@@ -15,7 +15,7 @@ Built with the latest web technologies, it provides real-time data visualization
 
 | **Frequency Analysis** | **Real-Time Decryption** |
 |:---:|:---:|
-| ![Frequency Analysis Chart](./assets/frequency-chart.jpeg) |
+| ![Frequency Analysis Chart](./assets/frequency-chart.png) |
 
 ---
 
