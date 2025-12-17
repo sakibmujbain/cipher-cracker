@@ -27,3 +27,14 @@ export const analyzeText = (text: string): FrequencyData[] => {
     percentage: totalChars > 0 ? (counts[char] / totalChars) * 100 : 0
   }));
 };
+
+
+export const decryptText = (text: string, shift: number): string => {
+  return text.replace(/[a-zA-Z]/g, (char) => {
+    const base = char <= 'Z' ? 65 : 97; // Handle uppercase (65) and lowercase (97)
+    // The Math: Convert char to 0-25, add shift, wrap around with modulo 26
+    return String.fromCharCode(
+      ((char.charCodeAt(0) - base + shift) % 26 + base)
+    );
+  });
+};
