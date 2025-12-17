@@ -1,24 +1,34 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { analyzeText, decryptText } from "@/lib/analyzer"; 
+import { analyzeText, decryptText } from "@/lib/analyzer";
+import { decodeBase64, decodeHex, decodeBinary } from "@/lib/decoders"; 
 import { FrequencyChart } from "@/components/FrequencyChart";
 
 export default function Home() {
   const [input, setInput] = useState("");
   const [shift, setShift] = useState(0);
+  const [error, setError] = useState<string | null>(null); 
 
-  // Analyze frequency (Memoized for performance)
   const frequencyData = useMemo(() => analyzeText(input), [input]);
-  
-  // Decrypt text in real-time based on slider value
   const decryptedText = useMemo(() => decryptText(input, shift), [input, shift]);
+
+  
+  const handleDecode = (decoder: (text: string) => string) => {
+    try {
+      const decoded = decoder(input);
+      setInput(decoded);
+      setError(null); 
+    } catch (err) {
+      setError("Failed to decode: Invalid format");
+      setTimeout(() => setError(null), 3000); // Hide error after 3s
+    }
+  };
 
   return (
     <main className="min-h-screen bg-black text-gray-100 p-8 flex flex-col items-center font-sans">
       <div className="max-w-4xl w-full space-y-8">
         
-        {/* Header */}
         <div className="text-center space-y-2">
           <h1 className="text-5xl font-bold bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">
             Cipher Breaker
@@ -30,21 +40,51 @@ export default function Home() {
 
         {/* Input Section */}
         <div className="w-full space-y-2">
-          <label className="text-sm font-bold text-gray-500 uppercase tracking-wider">Ciphertext Input</label>
+          
+          <div className="flex justify-between items-end">
+            <label className="text-sm font-bold text-gray-500 uppercase tracking-wider">Ciphertext Input</label>
+            
+            <div className="flex gap-2">
+              <span className="text-xs text-gray-500 self-center mr-2">Quick Decode:</span>
+              <button 
+                onClick={() => handleDecode(decodeBase64)}
+                className="px-3 py-1 text-xs font-mono bg-gray-800 hover:bg-cyan-900 border border-gray-600 rounded text-cyan-400 transition-colors"
+              >
+                Base64
+              </button>
+              <button 
+                onClick={() => handleDecode(decodeHex)}
+                className="px-3 py-1 text-xs font-mono bg-gray-800 hover:bg-cyan-900 border border-gray-600 rounded text-cyan-400 transition-colors"
+              >
+                Hex
+              </button>
+              <button 
+                onClick={() => handleDecode(decodeBinary)}
+                className="px-3 py-1 text-xs font-mono bg-gray-800 hover:bg-cyan-900 border border-gray-600 rounded text-cyan-400 transition-colors"
+              >
+                Binary
+              </button>
+            </div>
+          </div>
+
           <textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Paste your code here (e.g. GB OR ABG GB OR)..."
+            placeholder="Paste your code here..."
             className="w-full h-32 p-4 bg-gray-900 text-white border border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none font-mono text-sm resize-y placeholder-gray-600"
           />
+          
+          {/* 👇 NEW: Error Message Area */}
+          {error && (
+            <div className="text-red-400 text-xs font-bold animate-pulse">
+              ⚠️ {error}
+            </div>
+          )}
         </div>
 
-        {/* Chart Section */}
         <FrequencyChart data={frequencyData} />
 
-        {/* 🎛️ NEW: Decryption Dashboard */}
         <div className="bg-gray-900 p-6 rounded-xl border border-blue-500/30 shadow-2xl space-y-6">
-          
           <div className="flex justify-between items-center border-b border-gray-800 pb-4">
             <h2 className="text-xl font-bold text-white">Decryption Tool</h2>
             <span className="bg-blue-600 text-white px-3 py-1 rounded-full font-mono text-sm">
@@ -52,7 +92,6 @@ export default function Home() {
             </span>
           </div>
 
-          {/* The Slider */}
           <div className="space-y-2">
             <input
               type="range"
@@ -69,14 +108,12 @@ export default function Home() {
             </div>
           </div>
 
-          {/* The Result */}
           <div className="space-y-2">
              <label className="text-xs text-gray-500 uppercase">Decrypted Result:</label>
              <div className="p-4 bg-black/50 rounded-lg border border-gray-700 min-h-[100px] font-mono text-cyan-400 whitespace-pre-wrap break-words">
                {decryptedText || "Waiting for input..."}
              </div>
           </div>
-          
         </div>
 
       </div>
