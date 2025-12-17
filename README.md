@@ -13,9 +13,13 @@ Built with the latest web technologies, it provides real-time data visualization
 
 ## 📸 Screenshots
 
+### 🖥️ Full Interface
+![Cipher Cracker Full Interface](./assets/overall.png)
+
+### 🔍 Feature Details
 | **Frequency Analysis** | **Real-Time Decryption** |
 |:---:|:---:|
-| ![Frequency Analysis Chart](./assets/frequency-chart.png) |
+| ![Frequency Chart](./assets/frequency.png) | ![Decryption Tool](./assets/decrypt.png) |
 
 ---
 
