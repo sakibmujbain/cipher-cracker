@@ -4,6 +4,8 @@ import { useState, useMemo } from "react";
 import { analyzeText, decryptText } from "@/lib/analyzer";
 import { decodeBase64, decodeHex, decodeBinary } from "@/lib/decoders"; 
 import { FrequencyChart } from "@/components/FrequencyChart";
+import { MatrixRain } from "@/components/MatrixRain";
+import { TypewriterEffect } from "@/components/TypewriterEffect";
 
 export default function Home() {
   const [input, setInput] = useState("");
@@ -26,8 +28,14 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-black text-gray-100 p-8 flex flex-col items-center font-sans">
-      <div className="max-w-4xl w-full space-y-8">
+    <main className="min-h-screen bg-black text-gray-100 p-8 flex flex-col items-center font-sans relative overflow-hidden">
+      
+      {/* 1. Background Effects */}
+      <MatrixRain />
+      <div className="scanlines"></div>
+
+      {/* 2. Main Content Container (Added z-10 here) */}
+      <div className="max-w-4xl w-full space-y-8 z-10 relative">
         
         <div className="text-center space-y-2">
           <h1 className="text-5xl font-bold bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">
@@ -40,7 +48,6 @@ export default function Home() {
 
         {/* Input Section */}
         <div className="w-full space-y-2">
-          
           <div className="flex justify-between items-end">
             <label className="text-sm font-bold text-gray-500 uppercase tracking-wider">Ciphertext Input</label>
             
@@ -71,10 +78,9 @@ export default function Home() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Paste your code here..."
-            className="w-full h-32 p-4 bg-gray-900 text-white border border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none font-mono text-sm resize-y placeholder-gray-600"
+            className="w-full h-32 p-4 bg-gray-900 text-white border border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none font-mono text-sm resize-y placeholder-gray-600 z-20 relative"
           />
           
-          {/* 👇 NEW: Error Message Area */}
           {error && (
             <div className="text-red-400 text-xs font-bold animate-pulse">
               ⚠️ {error}
@@ -110,9 +116,9 @@ export default function Home() {
 
           <div className="space-y-2">
              <label className="text-xs text-gray-500 uppercase">Decrypted Result:</label>
-             <div className="p-4 bg-black/50 rounded-lg border border-gray-700 min-h-[100px] font-mono text-cyan-400 whitespace-pre-wrap break-words">
-               {decryptedText || "Waiting for input..."}
-             </div>
+            <div className="p-4 bg-black/50 rounded-lg border border-gray-700 min-h-[100px] font-mono text-cyan-400 whitespace-pre-wrap break-words">
+  <TypewriterEffect text={decryptedText || "Waiting for input..."} />
+</div>
           </div>
         </div>
 
