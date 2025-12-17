@@ -1,13 +1,13 @@
-# 🔐 Cipher Cracker
+# 🔐 Cipher Breaker
 
 ![License](https://img.shields.io/badge/License-MIT-blue.svg)
 ![Next.js](https://img.shields.io/badge/Next.js-15-black?logo=next.js)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?logo=typescript)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-cyan?logo=tailwindcss)
 
-**Cipher Cracker** is a modern, interactive web tool designed to help you break substitution ciphers (like Caesar ciphers and ROT13) using **Frequency Analysis**. 
+**Cipher Breaker** is a modern, interactive web tool designed for CTF players and cryptography enthusiasts. It helps you break substitution ciphers (like Caesar and ROT13) and decode common data formats instantly.
 
-Built with the latest web technologies, it provides real-time data visualization and instant decryption capabilities in a sleek dark-mode interface.
+Built with a "Hacker UI" aesthetic, it features real-time frequency analysis, data visualization, and immersive visual effects.
 
 ---
 
@@ -25,20 +25,19 @@ Built with the latest web technologies, it provides real-time data visualization
 
 ## ✨ Features
 
-* **📊 Real-Time Frequency Analysis**: Instantly visualizes the letter distribution of any text you paste.
-* **🕵️ Interactive Chart**: A custom-built bar chart (cyan/blue gradient) that highlights statistical anomalies to help identify shifts.
-* **🔓 Instant Decryption**: A "Shift Slider" that rotates the alphabet in real-time (0-25), allowing you to crack the code without page reloads.
-* **🌑 Sleek Dark Mode**: Designed for hackers and night owls, featuring a high-contrast UI with glowing accents.
-* **⚡ Blazing Fast**: Powered by Next.js 15 and Turbopack for instant feedback.
+### 🛠️ Core Tools
+* **📊 Real-Time Frequency Analysis**: Instantly visualizes the letter distribution of any text to spot statistical anomalies (like the letter 'E').
+* **🔓 Instant Decryption**: A "Shift Slider" that rotates the alphabet in real-time (0-25), allowing you to crack Caesar ciphers without page reloads.
+* **🕵️ Decoder Suite**: One-click decoding for common CTF formats:
+    * **Base64**
+    * **Hexadecimal**
+    * **Binary**
 
----
-
-## 🛠️ Tech Stack
-
-* **Framework:** [Next.js 15](https://nextjs.org/) (App Router)
-* **Styling:** [Tailwind CSS v4](https://tailwindcss.com/)
-* **Language:** [TypeScript](https://www.typescriptlang.org/)
-* **Charts:** Custom React Components (No heavy libraries)
+### 🎨 Hacker UI & Visuals
+* **🌧️ Matrix Rain Effect**: A fully animated, falling code background rendered on HTML5 Canvas.
+* **📺 CRT Scanlines**: A retro monitor overlay to give the tool a cyberpunk feel.
+* **⌨️ Typewriter Animation**: Decrypted text types out character-by-character for a satisfying "data streaming" effect.
+* **🌑 High Contrast Mode**: Optimized for readability with glowing cyan accents on a deep black background.
 
 ---
 
@@ -75,15 +74,25 @@ Follow these steps to run the project locally on your machine.
 
 ## 🧠 How to Use
 
-### 1. Analyze the Text
-Paste your encrypted text (Ciphertext) into the input box. The **Frequency Chart** will immediately populate.
-* *Tip:* Look for the tallest bars. In English, **'E'** is usually the most common letter. If your tallest bar is at 'H', the shift might be +3 (since E -> F -> G -> H).
+### 1. Analyze & Decode
+Paste your encrypted text (Ciphertext) into the input box.
+* **Is it gibberish?** Try the **Base64**, **Hex**, or **Binary** buttons to clean it up.
+* **Is it letters?** Look at the **Frequency Chart**. If 'H' is the tallest bar, but you know 'E' should be, the shift is likely around +3.
 
 ### 2. Crack the Code
 Scroll down to the **Decryption Tool**.
 * Drag the slider to shift the letters.
-* Watch the **Decrypted Result** box update instantly.
-* **Pro Tip:** If a cipher was shifted by **+3**, you need to shift it back. In the slider (which only adds), use **23** (because 26 - 3 = 23) to loop back around!
+* Watch the **Typewriter Animation** reveal the text in real-time.
+* **Pro Tip:** If a cipher was shifted by **+5**, you need to shift it back. In the slider (which adds), use **21** (26 - 5 = 21) to loop back around!
+
+---
+
+## 🛠️ Tech Stack
+
+* **Framework:** [Next.js 15](https://nextjs.org/) (App Router)
+* **Styling:** [Tailwind CSS v4](https://tailwindcss.com/)
+* **Language:** [TypeScript](https://www.typescriptlang.org/)
+* **Graphics:** HTML5 Canvas (for Matrix Rain)
 
 ---
 

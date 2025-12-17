@@ -6,6 +6,7 @@ import { decodeBase64, decodeHex, decodeBinary } from "@/lib/decoders";
 import { FrequencyChart } from "@/components/FrequencyChart";
 import { MatrixRain } from "@/components/MatrixRain";
 import { TypewriterEffect } from "@/components/TypewriterEffect";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export default function Home() {
   const [input, setInput] = useState("");
